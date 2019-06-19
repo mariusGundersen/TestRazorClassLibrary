@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 
 namespace MyRazorClassLib.Test
 {
@@ -31,6 +33,7 @@ namespace MyRazorClassLib.Test
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.Configure<RazorViewEngineOptions>(o => o.FileProviders.Add(new PhysicalFileProvider(Locator.Root)));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
